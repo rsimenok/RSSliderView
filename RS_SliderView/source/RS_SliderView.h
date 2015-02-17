@@ -24,7 +24,7 @@ typedef enum{
 
 @optional
 
--(void)sliderView:(RS_SliderView *)view score:(float)score;
+-(void)sliderView:(RS_SliderView *)view value:(float)value;
 
 @end
 
@@ -33,12 +33,13 @@ typedef enum{
 @property (nonatomic, strong) UIView *foregroundView;
 @property (nonatomic, strong) UIView *handleView;
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, assign) float value;
 
 @property (nonatomic, weak) id <RSliderViewDelegate> delegate;
 
 @property (nonatomic, assign) Orientation orientation;
 
--(void)setScore:(float)score withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion;
+-(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion;
 -(void)setColorsForBackground:(UIColor *)bCol foreground:(UIColor *)fCol handle:(UIColor *)hCol border:(UIColor *)brdrCol;
 
 -(id)initWithFrame:(CGRect)frame andOrientation:(Orientation)orientation;

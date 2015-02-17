@@ -41,9 +41,9 @@
     [self.view addSubview:vertSlider];
 }
 
--(void)sliderView:(RS_SliderView *)view score:(float)score {
+-(void)sliderView:(RS_SliderView *)view value:(float)value {
     // Slider value changed
-    NSLog(@"Slider Value: %f", score);
+    NSLog(@"Slider Value: %f", value);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5BC62A92-9106-4360-913B-5215ED044E34</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RS_SliderView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CAAF83AE3C1107F1EFAE5FBDBF21CF9E945DCA68</key>
+		<string>https://github.com/Sh1mor1nka/RS_SliderView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RS_SliderView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CAAF83AE3C1107F1EFAE5FBDBF21CF9E945DCA68</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Sh1mor1nka/RS_SliderView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CAAF83AE3C1107F1EFAE5FBDBF21CF9E945DCA68</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CAAF83AE3C1107F1EFAE5FBDBF21CF9E945DCA68</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RS_SliderView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

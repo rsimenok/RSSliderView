@@ -12,62 +12,80 @@
 @implementation RS_SliderView
 
 -(id)initWithFrame:(CGRect)frame andOrientation:(Orientation)orientation {
-    if (self = [super init]) {
-        self.frame = frame;
+    if (self = [super initWithFrame:frame]) {
         [self setOrientation:orientation];
-        
-        self.foregroundView = [[UIView alloc] init];
-        self.handleView = [[UIView alloc] init];
-        self.handleView.layer.cornerRadius = viewCornerRadius;
-        self.handleView.layer.masksToBounds = YES;
-        
-        switch (self.orientation) {
-            case Vertical:
-                self.label = [[UILabel alloc] init];
-                [self.label setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
-                self.label.frame = self.bounds;
-                break;
-            case Horizontal:
-                self.label = [[UILabel alloc] initWithFrame:self.bounds];
-                break;
-            default:
-                break;
+        [self initSlider];
+    }
+    
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    if(self = [super initWithCoder:aDecoder]) {
+        if (self.frame.size.width>self.frame.size.height) {
+            [self setOrientation:Horizontal];
+        }else{
+            [self setOrientation:Vertical];
         }
         
-        self.label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:self.foregroundView];
-        [self addSubview:self.label];
-        [self addSubview:self.handleView];
-        
-        self.layer.cornerRadius = viewCornerRadius;
-        self.layer.masksToBounds = YES;
-        [self.layer setBorderWidth:borderWidth];
-        
-        [self setScore:0.0 withAnimation:NO completion:nil];
+        [self initSlider];
     }
     return self;
 }
 
-#pragma mark - Set Value
-
--(void)setScore:(float)score withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion {
-    NSAssert((score >= 0.0)&&(score <= 1.0), @"score must be between 0 and 1");
+-(void)initSlider {
+    self.foregroundView = [[UIView alloc] init];
+    self.handleView = [[UIView alloc] init];
+    self.handleView.layer.cornerRadius = viewCornerRadius;
+    self.handleView.layer.masksToBounds = YES;
     
-    if (score < 0) {
-        score = 0;
+    switch (self.orientation) {
+        case Vertical:
+            self.label = [[UILabel alloc] init];
+            [self.label setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
+            self.label.frame = self.bounds;
+            break;
+        case Horizontal:
+            self.label = [[UILabel alloc] initWithFrame:self.bounds];
+            break;
+        default:
+            break;
     }
     
-    if (score > 1) {
-        score = 1;
+    self.label.textAlignment = NSTextAlignmentCenter;
+    self.label.font = [UIFont fontWithName:@"Helvetica" size:24];
+    [self addSubview:self.foregroundView];
+    [self addSubview:self.label];
+    [self addSubview:self.handleView];
+    
+    self.layer.cornerRadius = viewCornerRadius;
+    self.layer.masksToBounds = YES;
+    [self.layer setBorderWidth:borderWidth];
+    
+    // set defauld value for slider. Value should be between 0 and 1
+    [self setValue:0.0 withAnimation:NO completion:nil];
+}
+
+#pragma mark - Set Value
+
+-(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion {
+    NSAssert((value >= 0.0)&&(value <= 1.0), @"Value must be between 0 and 1");
+    
+    if (value < 0) {
+        value = 0;
+    }
+    
+    if (value > 1) {
+        value = 1;
     }
     
     CGPoint point;
     switch (self.orientation) {
         case Vertical:
-            point = CGPointMake(0, (1-score) * self.frame.size.height);
+            point = CGPointMake(0, (1-value) * self.frame.size.height);
             break;
         case Horizontal:
-            point = CGPointMake(score * self.frame.size.width, 0);
+            point = CGPointMake(value * self.frame.size.width, 0);
             break;
         default:
             break;
@@ -77,13 +95,13 @@
         __weak __typeof(self)weakSelf = self;
         
         [UIView animateWithDuration:animationSpeed animations:^ {
-             [weakSelf changeStarForegroundViewWithPoint:point];
-             
-         } completion:^(BOOL finished) {
-             if (completion) {
-                 completion(finished);
-             }
-         }];
+            [weakSelf changeStarForegroundViewWithPoint:point];
+            
+        } completion:^(BOOL finished) {
+            if (completion) {
+                completion(finished);
+            }
+        }];
     } else {
         [self changeStarForegroundViewWithPoint:point];
     }
@@ -139,7 +157,6 @@
 
 - (void)changeStarForegroundViewWithPoint:(CGPoint)point {
     CGPoint p = point;
-    float score = 0.0;
     
     switch (self.orientation) {
         case Vertical: {
@@ -151,7 +168,7 @@
                 p.y = self.frame.size.height;
             }
             
-            score = 1-(p.y / self.frame.size.height);
+            self.value = 1-(p.y / self.frame.size.height);
             self.foregroundView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, p.y-self.frame.size.height);
             
             if (self.foregroundView.frame.origin.y <= 0) {
@@ -172,7 +189,7 @@
                 p.x = self.frame.size.width;
             }
             
-            score = p.x / self.frame.size.width;
+            self.value = p.x / self.frame.size.width;
             self.foregroundView.frame = CGRectMake(0, 0, p.x, self.frame.size.height);
             
             if (self.foregroundView.frame.size.width <= 0) {
@@ -188,8 +205,8 @@
             break;
     }
     
-    if(self.delegate && [self.delegate respondsToSelector:@selector(sliderView: score:)]) {
-        [self.delegate sliderView:self score:score];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(sliderView: value:)]) {
+        [self.delegate sliderView:self value:self.value];
     }
 }
 
