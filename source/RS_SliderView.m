@@ -43,31 +43,32 @@
         self.layer.masksToBounds = YES;
         [self.layer setBorderWidth:borderWidth];
         
-        [self setScore:0.0 withAnimation:NO completion:nil];
+        // set defauld value for slider. Value should be between 0 and 1
+        [self setValue:0.0 withAnimation:NO completion:nil];
     }
     return self;
 }
 
 #pragma mark - Set Value
 
--(void)setScore:(float)score withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion {
-    NSAssert((score >= 0.0)&&(score <= 1.0), @"score must be between 0 and 1");
+-(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion {
+    NSAssert((value >= 0.0)&&(value <= 1.0), @"Value must be between 0 and 1");
     
-    if (score < 0) {
-        score = 0;
+    if (value < 0) {
+        value = 0;
     }
     
-    if (score > 1) {
-        score = 1;
+    if (value > 1) {
+        value = 1;
     }
     
     CGPoint point;
     switch (self.orientation) {
         case Vertical:
-            point = CGPointMake(0, (1-score) * self.frame.size.height);
+            point = CGPointMake(0, (1-value) * self.frame.size.height);
             break;
         case Horizontal:
-            point = CGPointMake(score * self.frame.size.width, 0);
+            point = CGPointMake(value * self.frame.size.width, 0);
             break;
         default:
             break;
@@ -139,7 +140,6 @@
 
 - (void)changeStarForegroundViewWithPoint:(CGPoint)point {
     CGPoint p = point;
-    float score = 0.0;
     
     switch (self.orientation) {
         case Vertical: {
@@ -151,7 +151,7 @@
                 p.y = self.frame.size.height;
             }
             
-            score = 1-(p.y / self.frame.size.height);
+            self.value = 1-(p.y / self.frame.size.height);
             self.foregroundView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, p.y-self.frame.size.height);
             
             if (self.foregroundView.frame.origin.y <= 0) {
@@ -172,7 +172,7 @@
                 p.x = self.frame.size.width;
             }
             
-            score = p.x / self.frame.size.width;
+            self.value = p.x / self.frame.size.width;
             self.foregroundView.frame = CGRectMake(0, 0, p.x, self.frame.size.height);
             
             if (self.foregroundView.frame.size.width <= 0) {
@@ -188,8 +188,8 @@
             break;
     }
     
-    if(self.delegate && [self.delegate respondsToSelector:@selector(sliderView: score:)]) {
-        [self.delegate sliderView:self score:score];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(sliderView: value:)]) {
+        [self.delegate sliderView:self value:self.value];
     }
 }
 
