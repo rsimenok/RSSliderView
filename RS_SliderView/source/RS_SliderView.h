@@ -24,7 +24,8 @@ typedef enum{
 
 @optional
 
--(void)sliderView:(RS_SliderView *)view value:(float)value;
+-(void)sliderValueChanged:(RS_SliderView *)sender; // calls when user is swiping slider
+-(void)sliderValueChangeEnded:(RS_SliderView *)sender; // calls when user touchUpInside or toucUpOutside slider
 
 @end
 

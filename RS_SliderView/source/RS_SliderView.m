@@ -140,6 +140,10 @@
         default:
             break;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sliderValueChanged:)]) {
+        [self.delegate sliderValueChanged:self];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -147,10 +151,13 @@
     CGPoint point = [touch locationInView:self];
     __weak __typeof(self)weakSelf = self;
     
-    [UIView animateWithDuration:animationSpeed animations:^
-     {
-         [weakSelf changeStarForegroundViewWithPoint:point];
-     }];
+    [UIView animateWithDuration:animationSpeed animations:^ {
+        [weakSelf changeStarForegroundViewWithPoint:point];
+    } completion:^(BOOL finished) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(sliderValueChangeEnded:)]) {
+            [self.delegate sliderValueChangeEnded:self];
+        }
+    }];
 }
 
 #pragma mark - Change Slider Foreground With Point
@@ -203,10 +210,6 @@
             break;
         default:
             break;
-    }
-    
-    if(self.delegate && [self.delegate respondsToSelector:@selector(sliderView: value:)]) {
-        [self.delegate sliderView:self value:self.value];
     }
 }
 
