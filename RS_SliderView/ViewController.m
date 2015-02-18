@@ -41,9 +41,12 @@
     [self.view addSubview:vertSlider];
 }
 
--(void)sliderView:(RS_SliderView *)view value:(float)value {
-    // Slider value changed
-    NSLog(@"Slider Value: %f", value);
+-(void)sliderValueChanged:(RS_SliderView *)sender {
+    NSLog(@"Value Changed: %f", sender.value);
+}
+
+-(void)sliderValueChangeEnded:(RS_SliderView *)sender {
+    NSLog(@"Toush ended: %f", sender.value);
 }
 
 - (void)didReceiveMemoryWarning {
