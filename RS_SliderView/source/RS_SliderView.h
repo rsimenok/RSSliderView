@@ -29,7 +29,9 @@ typedef enum{
 
 @end
 
-@interface RS_SliderView : UIView
+@interface RS_SliderView : UIView {
+    BOOL isHandleHidden;
+}
 
 @property (nonatomic, strong) UIView *foregroundView;
 @property (nonatomic, strong) UIView *handleView;
@@ -42,6 +44,8 @@ typedef enum{
 
 -(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion;
 -(void)setColorsForBackground:(UIColor *)bCol foreground:(UIColor *)fCol handle:(UIColor *)hCol border:(UIColor *)brdrCol;
+-(void)removeRoundCorners:(BOOL)corners removeBorder:(BOOL)border;
+-(void)hideHandle;
 
 -(id)initWithFrame:(CGRect)frame andOrientation:(Orientation)orientation;
 

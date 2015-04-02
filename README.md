@@ -30,7 +30,15 @@ after you set delegate you can get values from slider
     NSLog(@"Toush ended: %f", sender.value);
 }
 ```
+If you don't need handle
+``` Objective-C
+    [mySlider hideHandle];
+```
+If you don't like round corners or border
+``` Objective-C
+	[mySlider removeRoundCorners:YES removeBorder:YES];
+```
 
 ## License
 
-RS_SliderView is licensed under the terms of the [GNU GPL Version 3](http://www.gnu.org/copyleft/gpl.html). Please see the [LICENSE](LICENSE) file for full details.
+RS_SliderView is licensed under the terms of the MIT license. Please see the [LICENSE](LICENSE) file for full details.

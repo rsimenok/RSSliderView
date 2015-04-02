@@ -35,9 +35,14 @@
                             foreground:[UIColor colorWithRed:32.0/255.0 green:86.0/255.0 blue:0.0 alpha:1.0]
                                 handle:[UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0]
                                 border:[UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0]];
-    vertSlider.label.text = @"Vertical slider";
-    vertSlider.label.font = [UIFont fontWithName:@"Helvetica" size:25];
-    vertSlider.label.textColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
+    // If you don't need handle
+    [vertSlider hideHandle];
+    // if you don't like round corners or border
+    [vertSlider removeRoundCorners:YES removeBorder:YES];
+    // Uncoment if you need text on you slider
+//    vertSlider.label.text = @"Vertical slider";
+//    vertSlider.label.font = [UIFont fontWithName:@"Helvetica" size:25];
+//    vertSlider.label.textColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
     [self.view addSubview:vertSlider];
 }
 
@@ -46,7 +51,7 @@
 }
 
 -(void)sliderValueChangeEnded:(RS_SliderView *)sender {
-    NSLog(@"Toush ended: %f", sender.value);
+    NSLog(@"Touсh ended: %f", sender.value);
 }
 
 - (void)didReceiveMemoryWarning {

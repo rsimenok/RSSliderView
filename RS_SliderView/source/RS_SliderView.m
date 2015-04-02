@@ -34,6 +34,7 @@
 }
 
 -(void)initSlider {
+    isHandleHidden = NO;
     self.foregroundView = [[UIView alloc] init];
     self.handleView = [[UIView alloc] init];
     self.handleView.layer.cornerRadius = viewCornerRadius;
@@ -107,7 +108,7 @@
     }
 }
 
-#pragma mark - Set methods
+#pragma mark - Other methods
 
 -(void)setOrientation:(Orientation)orientation {
     _orientation = orientation;
@@ -118,6 +119,22 @@
     self.foregroundView.backgroundColor = fCol;
     self.handleView.backgroundColor = hCol;
     [self.layer setBorderColor:brdrCol.CGColor];
+}
+
+-(void)removeRoundCorners:(BOOL)corners removeBorder:(BOOL)borders {
+    if (corners) {
+        self.layer.cornerRadius = 0.0;
+        self.layer.masksToBounds = YES;
+    }
+    if (borders) {
+        [self.layer setBorderWidth:0.0];
+    }
+}
+
+-(void)hideHandle {
+    self.handleView.hidden = YES;
+    isHandleHidden = YES;
+    [self.handleView removeFromSuperview];
 }
 
 #pragma mark - Touch Events
@@ -178,12 +195,14 @@
             self.value = 1-(p.y / self.frame.size.height);
             self.foregroundView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, p.y-self.frame.size.height);
             
-            if (self.foregroundView.frame.origin.y <= 0) {
-                self.handleView.frame = CGRectMake(borderWidth, 0, self.frame.size.width-borderWidth*2, handleWidth);
-            }else if (self.foregroundView.frame.origin.y >= self.frame.size.height) {
-                self.handleView.frame = CGRectMake(borderWidth, self.frame.size.height-handleWidth, self.frame.size.width-borderWidth*2, handleWidth);
-            }else{
-                self.handleView.frame = CGRectMake(borderWidth, self.foregroundView.frame.origin.y-handleWidth/2, self.frame.size.width-borderWidth*2, handleWidth);
+            if (!isHandleHidden) {
+                if (self.foregroundView.frame.origin.y <= 0) {
+                    self.handleView.frame = CGRectMake(borderWidth, 0, self.frame.size.width-borderWidth*2, handleWidth);
+                }else if (self.foregroundView.frame.origin.y >= self.frame.size.height) {
+                    self.handleView.frame = CGRectMake(borderWidth, self.frame.size.height-handleWidth, self.frame.size.width-borderWidth*2, handleWidth);
+                }else{
+                    self.handleView.frame = CGRectMake(borderWidth, self.foregroundView.frame.origin.y-handleWidth/2, self.frame.size.width-borderWidth*2, handleWidth);
+                }
             }
         }
             break;
@@ -199,12 +218,14 @@
             self.value = p.x / self.frame.size.width;
             self.foregroundView.frame = CGRectMake(0, 0, p.x, self.frame.size.height);
             
-            if (self.foregroundView.frame.size.width <= 0) {
-                self.handleView.frame = CGRectMake(0, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth);
-            }else if (self.foregroundView.frame.size.width >= self.frame.size.width) {
-                self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
-            }else{
-                self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth/2, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
+            if (!isHandleHidden) {
+                if (self.foregroundView.frame.size.width <= 0) {
+                    self.handleView.frame = CGRectMake(0, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth);
+                }else if (self.foregroundView.frame.size.width >= self.frame.size.width) {
+                    self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
+                }else{
+                    self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth/2, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
+                }
             }
         }
             break;
