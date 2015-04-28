@@ -158,8 +158,10 @@
             break;
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(sliderValueChanged:)]) {
-        [self.delegate sliderValueChanged:self];
+    if ((point.x >= 0) && point.x <= self.frame.size.width-handleWidth) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(sliderValueChanged:)]) {
+            [self.delegate sliderValueChanged:self];
+        }
     }
 }
 
@@ -221,8 +223,10 @@
             if (!isHandleHidden) {
                 if (self.foregroundView.frame.size.width <= 0) {
                     self.handleView.frame = CGRectMake(0, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth);
+                    [self.delegate sliderValueChanged:self]; // or use sliderValueChangeEnded method
                 }else if (self.foregroundView.frame.size.width >= self.frame.size.width) {
                     self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
+                    [self.delegate sliderValueChanged:self]; // or use sliderValueChangeEnded method
                 }else{
                     self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth/2, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
                 }
