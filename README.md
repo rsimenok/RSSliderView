@@ -27,7 +27,7 @@ after you set delegate you can get values from slider
 }
 
 -(void)sliderValueChangeEnded:(RS_SliderView *)sender {
-    NSLog(@"Toush ended: %f", sender.value);
+    NSLog(@"Touch ended: %f", sender.value);
 }
 ```
 If you don't need handle
