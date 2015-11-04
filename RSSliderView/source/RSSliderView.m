@@ -1,6 +1,6 @@
 //
-//  RS_SliderView.m
-//  RS_SliderView
+//  RSSliderView.m
+//  RSSliderView
 //
 //  Created by Roman Simenok on 13.02.15.
 //  Copyright (c) 2015 Roman Simenok. All rights reserved.
@@ -23,9 +23,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "RS_SliderView.h"
+#import "RSSliderView.h"
 
-@implementation RS_SliderView
+@implementation RSSliderView
 
 -(id)initWithFrame:(CGRect)frame andOrientation:(Orientation)orientation {
     if (self = [super initWithFrame:frame]) {

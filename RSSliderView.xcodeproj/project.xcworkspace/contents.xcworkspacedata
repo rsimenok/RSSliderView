@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:RS_SliderView.xcodeproj">
+      location = "self:/Volumes/MacintoshHDD/Projects/Open Source/RS_SliderView/RSSliderView.xcodeproj">
    </FileRef>
 </Workspace>

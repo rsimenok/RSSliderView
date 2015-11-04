@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "30EA4E4A1A925BC400A91924"
-               BuildableName = "RS_SliderView.app"
-               BlueprintName = "RS_SliderView"
-               ReferencedContainer = "container:RS_SliderView.xcodeproj">
+               BuildableName = "RSSliderView.app"
+               BlueprintName = "RSSliderView"
+               ReferencedContainer = "container:RSSliderView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,16 +31,16 @@
                BlueprintIdentifier = "30EA4E631A925BC400A91924"
                BuildableName = "RS_SliderViewTests.xctest"
                BlueprintName = "RS_SliderViewTests"
-               ReferencedContainer = "container:RS_SliderView.xcodeproj">
+               ReferencedContainer = "container:RSSliderView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "30EA4E631A925BC400A91924"
                BuildableName = "RS_SliderViewTests.xctest"
                BlueprintName = "RS_SliderViewTests"
-               ReferencedContainer = "container:RS_SliderView.xcodeproj">
+               ReferencedContainer = "container:RSSliderView.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,46 +57,51 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "30EA4E4A1A925BC400A91924"
-            BuildableName = "RS_SliderView.app"
-            BlueprintName = "RS_SliderView"
-            ReferencedContainer = "container:RS_SliderView.xcodeproj">
+            BuildableName = "RSSliderView.app"
+            BlueprintName = "RSSliderView"
+            ReferencedContainer = "container:RSSliderView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "30EA4E4A1A925BC400A91924"
-            BuildableName = "RS_SliderView.app"
-            BlueprintName = "RS_SliderView"
-            ReferencedContainer = "container:RS_SliderView.xcodeproj">
+            BuildableName = "RSSliderView.app"
+            BlueprintName = "RSSliderView"
+            ReferencedContainer = "container:RSSliderView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "30EA4E4A1A925BC400A91924"
-            BuildableName = "RS_SliderView.app"
-            BlueprintName = "RS_SliderView"
-            ReferencedContainer = "container:RS_SliderView.xcodeproj">
+            BuildableName = "RSSliderView.app"
+            BlueprintName = "RSSliderView"
+            ReferencedContainer = "container:RSSliderView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

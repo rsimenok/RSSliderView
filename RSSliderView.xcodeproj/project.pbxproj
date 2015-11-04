@@ -13,11 +13,11 @@
 		30EA4E5A1A925BC400A91924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E581A925BC400A91924 /* Main.storyboard */; };
 		30EA4E5C1A925BC400A91924 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E5B1A925BC400A91924 /* Images.xcassets */; };
 		30EA4E5F1A925BC400A91924 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E5D1A925BC400A91924 /* LaunchScreen.xib */; };
-		30EA4E771A925C9300A91924 /* RS_SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA4E761A925C9300A91924 /* RS_SliderView.m */; };
+		30EA4E771A925C9300A91924 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA4E761A925C9300A91924 /* RSSliderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		30EA4E4B1A925BC400A91924 /* RS_SliderView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RS_SliderView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30EA4E4B1A925BC400A91924 /* RSSliderView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSliderView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EA4E4F1A925BC400A91924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30EA4E501A925BC400A91924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		30EA4E521A925BC400A91924 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -27,10 +27,8 @@
 		30EA4E591A925BC400A91924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30EA4E5B1A925BC400A91924 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		30EA4E5E1A925BC400A91924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		30EA4E691A925BC400A91924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30EA4E6A1A925BC400A91924 /* RS_SliderViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RS_SliderViewTests.m; sourceTree = "<group>"; };
-		30EA4E751A925C9300A91924 /* RS_SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RS_SliderView.h; sourceTree = "<group>"; };
-		30EA4E761A925C9300A91924 /* RS_SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RS_SliderView.m; sourceTree = "<group>"; };
+		30EA4E751A925C9300A91924 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
+		30EA4E761A925C9300A91924 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,8 +45,7 @@
 		30EA4E421A925BC400A91924 = {
 			isa = PBXGroup;
 			children = (
-				30EA4E4D1A925BC400A91924 /* RS_SliderView */,
-				30EA4E671A925BC400A91924 /* RS_SliderViewTests */,
+				30EA4E4D1A925BC400A91924 /* RSSliderView */,
 				30EA4E4C1A925BC400A91924 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +53,12 @@
 		30EA4E4C1A925BC400A91924 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30EA4E4B1A925BC400A91924 /* RS_SliderView.app */,
+				30EA4E4B1A925BC400A91924 /* RSSliderView.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30EA4E4D1A925BC400A91924 /* RS_SliderView */ = {
+		30EA4E4D1A925BC400A91924 /* RSSliderView */ = {
 			isa = PBXGroup;
 			children = (
 				30EA4E741A925C9300A91924 /* source */,
@@ -74,7 +71,7 @@
 				30EA4E5D1A925BC400A91924 /* LaunchScreen.xib */,
 				30EA4E4E1A925BC400A91924 /* Supporting Files */,
 			);
-			path = RS_SliderView;
+			path = RSSliderView;
 			sourceTree = "<group>";
 		};
 		30EA4E4E1A925BC400A91924 /* Supporting Files */ = {
@@ -86,28 +83,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		30EA4E671A925BC400A91924 /* RS_SliderViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				30EA4E6A1A925BC400A91924 /* RS_SliderViewTests.m */,
-				30EA4E681A925BC400A91924 /* Supporting Files */,
-			);
-			path = RS_SliderViewTests;
-			sourceTree = "<group>";
-		};
-		30EA4E681A925BC400A91924 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				30EA4E691A925BC400A91924 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		30EA4E741A925C9300A91924 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				30EA4E751A925C9300A91924 /* RS_SliderView.h */,
-				30EA4E761A925C9300A91924 /* RS_SliderView.m */,
+				30EA4E751A925C9300A91924 /* RSSliderView.h */,
+				30EA4E761A925C9300A91924 /* RSSliderView.m */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -115,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30EA4E4A1A925BC400A91924 /* RS_SliderView */ = {
+		30EA4E4A1A925BC400A91924 /* RSSliderView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RS_SliderView" */;
+			buildConfigurationList = 30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RSSliderView" */;
 			buildPhases = (
 				30EA4E471A925BC400A91924 /* Sources */,
 				30EA4E481A925BC400A91924 /* Frameworks */,
@@ -127,9 +107,9 @@
 			);
 			dependencies = (
 			);
-			name = RS_SliderView;
+			name = RSSliderView;
 			productName = RS_SliderView;
-			productReference = 30EA4E4B1A925BC400A91924 /* RS_SliderView.app */;
+			productReference = 30EA4E4B1A925BC400A91924 /* RSSliderView.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -146,7 +126,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RS_SliderView" */;
+			buildConfigurationList = 30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RSSliderView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -159,7 +139,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				30EA4E4A1A925BC400A91924 /* RS_SliderView */,
+				30EA4E4A1A925BC400A91924 /* RSSliderView */,
 			);
 		};
 /* End PBXProject section */
@@ -182,7 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30EA4E771A925C9300A91924 /* RS_SliderView.m in Sources */,
+				30EA4E771A925C9300A91924 /* RSSliderView.m in Sources */,
 				30EA4E571A925BC400A91924 /* ViewController.m in Sources */,
 				30EA4E541A925BC400A91924 /* AppDelegate.m in Sources */,
 				30EA4E511A925BC400A91924 /* main.m in Sources */,
@@ -293,9 +273,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = RS_SliderView/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RSSliderView/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RSSliderView;
 			};
 			name = Debug;
 		};
@@ -303,16 +283,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = RS_SliderView/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RSSliderView/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RSSliderView;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RS_SliderView" */ = {
+		30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RSSliderView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30EA4E6C1A925BC400A91924 /* Debug */,
@@ -321,7 +301,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RS_SliderView" */ = {
+		30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RSSliderView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30EA4E6F1A925BC400A91924 /* Debug */,

@@ -1,6 +1,6 @@
 //
-//  RS_SliderView.h
-//  RS_SliderView
+//  RSSliderView.h
+//  RSSliderView
 //
 //  Created by Roman Simenok on 13.02.15.
 //  Copyright (c) 2015 Roman Simenok. All rights reserved.
@@ -30,9 +30,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class RS_SliderView;
+@class RSSliderView;
 
-typedef enum{
+typedef enum {
     Vertical,
     Horizontal
 } Orientation;
@@ -41,12 +41,12 @@ typedef enum{
 
 @optional
 
--(void)sliderValueChanged:(RS_SliderView *)sender; // calls when user is swiping slider
--(void)sliderValueChangeEnded:(RS_SliderView *)sender; // calls when user touchUpInside or toucUpOutside slider
+-(void)sliderValueChanged:(RSSliderView *)sender; // calls when user is swiping slider
+-(void)sliderValueChangeEnded:(RSSliderView *)sender; // calls when user touchUpInside or toucUpOutside slider
 
 @end
 
-@interface RS_SliderView : UIView {
+@interface RSSliderView : UIView {
     BOOL isHandleHidden;
 }
 
