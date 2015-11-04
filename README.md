@@ -22,11 +22,11 @@ horSlider.label.textColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184
 
 after you set delegate you can get values from slider
 ``` Objective-C
--(void)sliderValueChanged:(RS_SliderView *)sender {
+-(void)sliderValueChanged:(RSSliderView *)sender {
     NSLog(@"Value Changed: %f", sender.value);
 }
 
--(void)sliderValueChangeEnded:(RS_SliderView *)sender {
+-(void)sliderValueChangeEnded:(RSSliderView *)sender {
     NSLog(@"Touch ended: %f", sender.value);
 }
 ```
