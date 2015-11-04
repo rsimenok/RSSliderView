@@ -1,5 +1,5 @@
-# RS_SliderView
-RS_SliderView is a simple control for IOS based on UIView Class.
+# RSSliderView
+RSSliderView is a simple control for IOS based on UIView Class.
 
 Here a preview:
 
@@ -8,7 +8,7 @@ Here a preview:
 To create slider just do:
 
 ``` Objective-C
-RS_SliderView *horSlider = [[RS_SliderView alloc] initWithFrame:CGRectMake(40, 40, 300, 80) andOrientation:Horizontal];
+RSSliderView *horSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(40, 40, 300, 80) andOrientation:Horizontal];
 horSlider.delegate = self;
 [horSlider setColorsForBackground:[UIColor colorWithRed:27.0/255.0 green:28.0/255.0 blue:37.0/255.0 alpha:1.0]
                        foreground:[UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0]
@@ -41,4 +41,4 @@ If you don't like round corners or border
 
 ## License
 
-RS_SliderView is licensed under the terms of the MIT license. Please see the [LICENSE](LICENSE) file for full details.
+RSSliderView is licensed under the terms of the MIT license. Please see the [LICENSE](LICENSE) file for full details.
