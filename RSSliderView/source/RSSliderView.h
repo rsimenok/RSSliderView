@@ -59,6 +59,7 @@ typedef enum {
 
 @property (nonatomic, assign) Orientation orientation;
 
+-(void)setValue:(float)value;
 -(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion;
 -(void)setColorsForBackground:(UIColor *)bCol foreground:(UIColor *)fCol handle:(UIColor *)hCol border:(UIColor *)brdrCol;
 -(void)removeRoundCorners:(BOOL)corners removeBorder:(BOOL)border;

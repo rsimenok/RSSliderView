@@ -85,6 +85,10 @@
 
 #pragma mark - Set Value
 
+-(void)setValue:(float)value {
+    [self setValue:value withAnimation:NO completion:nil];
+}
+
 -(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion {
     NSAssert((value >= 0.0)&&(value <= 1.0), @"Value must be between 0 and 1");
     
