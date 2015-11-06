@@ -53,7 +53,7 @@ typedef enum {
 @property (nonatomic, strong) UIView *foregroundView;
 @property (nonatomic, strong) UIView *handleView;
 @property (nonatomic, strong) UILabel *label;
-@property (nonatomic, assign) float value;
+@property (nonatomic, assign, setter=setSliderValue:) float value;
 
 @property (nonatomic, weak) id <RSliderViewDelegate> delegate;
 
