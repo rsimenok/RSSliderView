@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  RS_SliderView
+//  RSSliderViewExample
 //
 //  Created by Roman Simenok on 16.02.15.
 //  Copyright (c) 2015 Roman Simenok. All rights reserved.
@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "RSSliderView.h"
 
-@interface ViewController () <RSliderViewDelegate>
+@interface ViewController () <RSSliderViewDelegate>
 
 @end
 
@@ -18,31 +18,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    RSSliderView *horSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(20, 40, 280, 70) andOrientation:RSSliderOrientationHorizontal];
+    RSSliderView *horSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(20, 40, 280, 70)];
     horSlider.delegate = self;
-    [horSlider setColorsForBackground:[UIColor colorWithRed:27.0/255.0 green:28.0/255.0 blue:37.0/255.0 alpha:1.0]
-                           foreground:[UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0]
-                               handle:[UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0]
-                               border:[UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0]];
-    horSlider.label.text = @"Horizontal slider";
-    // default font is Helvetica, size 24, so set font only if you need to change it.
-    horSlider.label.font = [UIFont fontWithName:@"Helvetica" size:25];
-    horSlider.label.textColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
+    horSlider.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:28.0/255.0 blue:37.0/255.0 alpha:1.0];
+    horSlider.foregroundColor = [UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0];
+    horSlider.handleColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
+    horSlider.borderColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
+    horSlider.text = @"Horizontal slider";
+    
+    horSlider.textColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
     [self.view addSubview:horSlider];
     
-    RSSliderView *vertSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(150, 200, 80, 300) andOrientation:RSSliderOrientationVertical];
+    RSSliderView *vertSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(150, 200, 80, 300)];
     vertSlider.delegate = self;
-    [vertSlider setColorsForBackground:[UIColor colorWithRed:37.0/255.0 green:46.0/255.0 blue:38.0/255.0 alpha:1.0]
-                            foreground:[UIColor colorWithRed:32.0/255.0 green:86.0/255.0 blue:0.0 alpha:1.0]
-                                handle:[UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0]
-                                border:[UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0]];
-    // If you don't need handle
-    [vertSlider hideHandle];
+    vertSlider.backgroundColor = [UIColor colorWithRed:37.0/255.0 green:46.0/255.0 blue:38.0/255.0 alpha:1.0];
+    vertSlider.foregroundColor = [UIColor colorWithRed:32.0/255.0 green:86.0/255.0 blue:0.0 alpha:1.0];
+    vertSlider.handleColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
+    vertSlider.borderColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
     
     // Coment code below if you donn't need text on you slider
-    vertSlider.label.text = @"Vertical slider";
-    vertSlider.label.font = [UIFont fontWithName:@"Helvetica" size:25];
-    vertSlider.label.textColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
+    vertSlider.text = @"Vertical slider";
+    vertSlider.textColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
     [self.view addSubview:vertSlider];
 }
 

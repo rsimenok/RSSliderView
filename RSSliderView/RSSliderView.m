@@ -25,72 +25,69 @@
 
 #import "RSSliderView.h"
 
+#define handleWidth 14.0 // handle width
+#define animationSpeed 0.1 // speed when slider change position on tap
+
+@interface RSSliderView()
+
+@property (nonatomic, strong) UIView *foregroundView;
+@property (nonatomic, strong) UIView *handleView;
+@property (nonatomic, strong, readwrite) UILabel *textLabel;
+
+@end
+
 @implementation RSSliderView
 
--(id)initWithFrame:(CGRect)frame andOrientation:(Orientation)orientation {
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        RSSliderViewOrientation orientation = self.frame.size.width > self.frame.size.height ? RSSliderViewOrientationHorizontal : RSSliderViewOrientationVertical;
         [self setOrientation:orientation];
-        [self initSlider];
+        [self mainInit];
     }
     
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    if(self = [super initWithCoder:aDecoder]) {
-        if (self.frame.size.width>self.frame.size.height) {
-            [self setOrientation:Horizontal];
-        }else{
-            [self setOrientation:Vertical];
-        }
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        RSSliderViewOrientation orientation = self.frame.size.width > self.frame.size.height ? RSSliderViewOrientationHorizontal : RSSliderViewOrientationVertical;
+        [self setOrientation:orientation];
         
-        [self initSlider];
+        [self mainInit];
     }
     return self;
 }
 
--(void)initSlider {
-    isHandleHidden = NO;
-    self.foregroundView = [[UIView alloc] init];
-    self.handleView = [[UIView alloc] init];
-    self.handleView.layer.cornerRadius = viewCornerRadius;
+- (void)mainInit {
+    self.layer.masksToBounds = YES;
+    
+    self.foregroundView = [UIView new];
+    self.handleView = [UIView new];
     self.handleView.layer.masksToBounds = YES;
     
-    switch (self.orientation) {
-        case Vertical:
-            self.label = [[UILabel alloc] init];
-            [self.label setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
-            self.label.frame = self.bounds;
-            break;
-        case Horizontal:
-            self.label = [[UILabel alloc] initWithFrame:self.bounds];
-            break;
-        default:
-            break;
-    }
-    
-    self.label.textAlignment = NSTextAlignmentCenter;
-    self.label.font = [UIFont fontWithName:@"Helvetica" size:24];
     [self addSubview:self.foregroundView];
-    [self addSubview:self.label];
+    [self addSubview:self.textLabel];
     [self addSubview:self.handleView];
     
-    self.layer.cornerRadius = viewCornerRadius;
-    self.layer.masksToBounds = YES;
-    [self.layer setBorderWidth:borderWidth];
-    
-    // set defauld value for slider. Value should be between 0 and 1
-    [self setValue:0.0 withAnimation:NO completion:nil];
+    // Setup default appearance
+    [self setBorderWidth:2.0];
+    [self setCornerRadius:5.0];
+    [self setHandleHidden:NO];
+    [self setValue:0.0];
 }
 
-#pragma mark - Set Value
+#pragma mark - Get/Set
 
--(void)setValue:(float)value {
-    [self setValue:value withAnimation:NO completion:nil];
+- (void)setValue:(float)value {
+    [self setValue:value withAnimation:NO];
 }
 
--(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion {
-    NSAssert((value >= 0.0)&&(value <= 1.0), @"Value must be between 0 and 1");
+- (void)setValue:(float)value withAnimation:(bool)animate {
+    [self setValue:value withAnimation:animate completion:nil];
+}
+
+- (void)setValue:(float)value withAnimation:(bool)animate completion:(void (^)(BOOL finished))completion {
+    NSAssert((value >= 0.0) && (value <= 1.0), @"Value must be between 0 and 1");
     
     if (value < 0) {
         value = 0;
@@ -102,22 +99,21 @@
     
     CGPoint point;
     switch (self.orientation) {
-        case Vertical:
+        case RSSliderViewOrientationVertical:
             point = CGPointMake(0, (1-value) * self.frame.size.height);
             break;
-        case Horizontal:
+        case RSSliderViewOrientationHorizontal:
             point = CGPointMake(value * self.frame.size.width, 0);
             break;
         default:
             break;
     }
     
-    if(isAnimate) {
-        __weak __typeof(self)weakSelf = self;
+    if (animate) {
+        __weak typeof(self) weakSelf = self;
         
         [UIView animateWithDuration:animationSpeed animations:^ {
             [weakSelf changeStarForegroundViewWithPoint:point];
-            
         } completion:^(BOOL finished) {
             if (completion) {
                 completion(finished);
@@ -128,33 +124,96 @@
     }
 }
 
-#pragma mark - Other methods
-
--(void)setOrientation:(Orientation)orientation {
+- (void)setOrientation:(RSSliderViewOrientation)orientation {
     _orientation = orientation;
-}
-
--(void)setColorsForBackground:(UIColor *)bCol foreground:(UIColor *)fCol handle:(UIColor *)hCol border:(UIColor *)brdrCol {
-    self.backgroundColor = bCol;
-    self.foregroundView.backgroundColor = fCol;
-    self.handleView.backgroundColor = hCol;
-    [self.layer setBorderColor:brdrCol.CGColor];
-}
-
--(void)removeRoundCorners:(BOOL)corners removeBorder:(BOOL)borders {
-    if (corners) {
-        self.layer.cornerRadius = 0.0;
-        self.layer.masksToBounds = YES;
-    }
-    if (borders) {
-        [self.layer setBorderWidth:0.0];
+    
+    switch (orientation) {
+        case RSSliderViewOrientationVertical:
+            [self.textLabel setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
+            self.textLabel.frame = self.bounds;
+            break;
+        case RSSliderViewOrientationHorizontal:
+            [self.textLabel setTransform:CGAffineTransformIdentity];
+            break;
+        default:
+            break;
     }
 }
 
--(void)hideHandle {
-    self.handleView.hidden = YES;
-    isHandleHidden = YES;
-    [self.handleView removeFromSuperview];
+- (UILabel *)textLabel {
+    if (!_textLabel) {
+        _textLabel = [[UILabel alloc] init];
+        _textLabel.frame = self.bounds;
+        _textLabel.textAlignment = NSTextAlignmentCenter;
+        _textLabel.font = [UIFont fontWithName:@"Helvetica" size:24];
+        [self insertSubview:_textLabel atIndex:1];
+    }
+    return _textLabel;
+}
+
+- (void)setForegroundColor:(UIColor *)foregroundColor {
+    self.foregroundView.backgroundColor = foregroundColor;
+}
+
+- (UIColor *)foregroundColor {
+    return self.foregroundView.backgroundColor;
+}
+
+- (void)setHandleColor:(UIColor *)handleColor {
+    self.handleView.backgroundColor = handleColor;
+}
+
+- (UIColor *)handleColor {
+    return self.handleView.backgroundColor;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    self.layer.borderColor = borderColor.CGColor;
+}
+
+- (UIColor *)borderColor {
+    return [UIColor colorWithCGColor:self.layer.borderColor];
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    self.layer.cornerRadius = cornerRadius;
+    self.handleView.layer.cornerRadius = cornerRadius;
+}
+
+- (CGFloat)cornerRadius {
+    return self.layer.cornerRadius;
+}
+
+- (void)setFont:(UIFont *)font {
+    self.textLabel.font = font;
+}
+
+- (UIFont *)font {
+    return self.textLabel.font;
+}
+
+- (void)setText:(NSString *)text {
+    self.textLabel.text = text;
+}
+
+- (NSString *)text {
+    return self.textLabel.text;
+}
+
+- (void)setHandleHidden:(BOOL)handleHidden {
+    self.handleView.hidden = handleHidden;
+}
+
+- (BOOL)isHandleHidden {
+    return self.handleView.hidden;
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth {
+    self.layer.borderWidth = borderWidth;
+}
+
+- (CGFloat)borderWidth {
+    return self.layer.borderWidth;
 }
 
 #pragma mark - Touch Events
@@ -163,13 +222,15 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
     
+    [self.delegate sliderValueWillChange:self];
+    
     switch (self.orientation) {
-        case Vertical:
+        case RSSliderViewOrientationVertical:
             if (!(point.y < 0) && !(point.y > self.frame.size.height)) {
                 [self changeStarForegroundViewWithPoint:point];
             }
             break;
-        case Horizontal:
+        case RSSliderViewOrientationHorizontal:
             if (!(point.x < 0) && !(point.x > self.frame.size.width)) {
                 [self changeStarForegroundViewWithPoint:point];
             }
@@ -178,24 +239,22 @@
             break;
     }
     
-    if ((point.x >= 0) && point.x <= self.frame.size.width-handleWidth) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(sliderValueChanged:)]) {
-            [self.delegate sliderValueChanged:self];
-        }
+    if ((point.x >= 0) && point.x <= self.frame.size.width - handleWidth) {
+        [self.delegate sliderValueDidChange:self];
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.delegate sliderValueWillChange:self];
+    
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    __weak __typeof(self)weakSelf = self;
     
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:animationSpeed animations:^ {
         [weakSelf changeStarForegroundViewWithPoint:point];
     } completion:^(BOOL finished) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(sliderValueChangeEnded:)]) {
-            [self.delegate sliderValueChangeEnded:self];
-        }
+        [self.delegate sliderValueDidChange:self];
     }];
 }
 
@@ -205,7 +264,7 @@
     CGPoint p = point;
     
     switch (self.orientation) {
-        case Vertical: {
+        case RSSliderViewOrientationVertical: {
             if (p.y < 0) {
                 p.y = 0;
             }
@@ -214,21 +273,33 @@
                 p.y = self.frame.size.height;
             }
             
-            self.value = 1-(p.y / self.frame.size.height);
-            self.foregroundView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, p.y-self.frame.size.height);
+            self.value = 1 - (p.y / self.frame.size.height);
+            self.foregroundView.frame = CGRectMake(0,
+                                                   self.frame.size.height,
+                                                   self.frame.size.width,
+                                                   p.y - self.frame.size.height);
             
-            if (!isHandleHidden) {
+            if (!self.isHandleHidden) {
                 if (self.foregroundView.frame.origin.y <= 0) {
-                    self.handleView.frame = CGRectMake(borderWidth, 0, self.frame.size.width-borderWidth*2, handleWidth);
+                    self.handleView.frame = CGRectMake(self.borderWidth,
+                                                       0,
+                                                       self.frame.size.width - self.borderWidth * 2,
+                                                       handleWidth);
                 }else if (self.foregroundView.frame.origin.y >= self.frame.size.height) {
-                    self.handleView.frame = CGRectMake(borderWidth, self.frame.size.height-handleWidth, self.frame.size.width-borderWidth*2, handleWidth);
-                }else{
-                    self.handleView.frame = CGRectMake(borderWidth, self.foregroundView.frame.origin.y-handleWidth/2, self.frame.size.width-borderWidth*2, handleWidth);
+                    self.handleView.frame = CGRectMake(self.borderWidth,
+                                                       self.frame.size.height - handleWidth,
+                                                       self.frame.size.width - self.borderWidth * 2,
+                                                       handleWidth);
+                } else {
+                    self.handleView.frame = CGRectMake(self.borderWidth,
+                                                       self.foregroundView.frame.origin.y - handleWidth / 2,
+                                                       self.frame.size.width - self.borderWidth * 2,
+                                                       handleWidth);
                 }
             }
         }
             break;
-        case Horizontal: {
+        case RSSliderViewOrientationHorizontal: {
             if (p.x < 0) {
                 p.x = 0;
             }
@@ -240,15 +311,22 @@
             self.value = p.x / self.frame.size.width;
             self.foregroundView.frame = CGRectMake(0, 0, p.x, self.frame.size.height);
             
-            if (!isHandleHidden) {
+            if (!self.isHandleHidden) {
                 if (self.foregroundView.frame.size.width <= 0) {
-                    self.handleView.frame = CGRectMake(0, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth);
-                    [self.delegate sliderValueChanged:self]; // or use sliderValueChangeEnded method
-                }else if (self.foregroundView.frame.size.width >= self.frame.size.width) {
-                    self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
-                    [self.delegate sliderValueChanged:self]; // or use sliderValueChangeEnded method
-                }else{
-                    self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width-handleWidth/2, borderWidth, handleWidth, self.foregroundView.frame.size.height-borderWidth*2);
+                    self.handleView.frame = CGRectMake(0,
+                                                       self.borderWidth,
+                                                       handleWidth,
+                                                       self.foregroundView.frame.size.height-self.borderWidth);
+                } else if (self.foregroundView.frame.size.width >= self.frame.size.width) {
+                    self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width - handleWidth,
+                                                       self.borderWidth,
+                                                       handleWidth,
+                                                       self.foregroundView.frame.size.height - self.borderWidth * 2);
+                } else {
+                    self.handleView.frame = CGRectMake(self.foregroundView.frame.size.width - handleWidth / 2,
+                                                       self.borderWidth,
+                                                       handleWidth,
+                                                       self.foregroundView.frame.size.height - self.borderWidth * 2);
                 }
             }
         }

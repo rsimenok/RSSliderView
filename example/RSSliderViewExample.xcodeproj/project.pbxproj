@@ -7,18 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		301F1E781E6790C6006FE682 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 301F1E771E6790C6006FE682 /* RSSliderView.m */; };
 		30EA4E511A925BC400A91924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA4E501A925BC400A91924 /* main.m */; };
 		30EA4E541A925BC400A91924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA4E531A925BC400A91924 /* AppDelegate.m */; };
 		30EA4E571A925BC400A91924 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA4E561A925BC400A91924 /* ViewController.m */; };
 		30EA4E5A1A925BC400A91924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E581A925BC400A91924 /* Main.storyboard */; };
 		30EA4E5C1A925BC400A91924 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E5B1A925BC400A91924 /* Images.xcassets */; };
 		30EA4E5F1A925BC400A91924 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E5D1A925BC400A91924 /* LaunchScreen.xib */; };
+		FC9DDB872199D21F00BC6128 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9DDB852199D21F00BC6128 /* RSSliderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		301F1E761E6790C6006FE682 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
-		301F1E771E6790C6006FE682 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
 		30EA4E4B1A925BC400A91924 /* RSSliderViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSliderViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EA4E4F1A925BC400A91924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30EA4E501A925BC400A91924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -29,6 +27,8 @@
 		30EA4E591A925BC400A91924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30EA4E5B1A925BC400A91924 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		30EA4E5E1A925BC400A91924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		FC9DDB852199D21F00BC6128 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
+		FC9DDB862199D21F00BC6128 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,15 +42,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		301F1E751E6790C6006FE682 /* RSSliderView */ = {
-			isa = PBXGroup;
-			children = (
-				301F1E761E6790C6006FE682 /* RSSliderView.h */,
-				301F1E771E6790C6006FE682 /* RSSliderView.m */,
-			);
-			path = RSSliderView;
-			sourceTree = "<group>";
-		};
 		30EA4E421A925BC400A91924 = {
 			isa = PBXGroup;
 			children = (
@@ -70,9 +61,9 @@
 		30EA4E4D1A925BC400A91924 /* RSSliderViewExample */ = {
 			isa = PBXGroup;
 			children = (
+				FC9DDB842199D21F00BC6128 /* RSSliderView */,
 				30EA4E551A925BC400A91924 /* ViewController.h */,
 				30EA4E561A925BC400A91924 /* ViewController.m */,
-				301F1E751E6790C6006FE682 /* RSSliderView */,
 				30EA4E521A925BC400A91924 /* AppDelegate.h */,
 				30EA4E531A925BC400A91924 /* AppDelegate.m */,
 				30EA4E581A925BC400A91924 /* Main.storyboard */,
@@ -90,6 +81,16 @@
 				30EA4E501A925BC400A91924 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC9DDB842199D21F00BC6128 /* RSSliderView */ = {
+			isa = PBXGroup;
+			children = (
+				FC9DDB862199D21F00BC6128 /* RSSliderView.h */,
+				FC9DDB852199D21F00BC6128 /* RSSliderView.m */,
+			);
+			name = RSSliderView;
+			path = ../../RSSliderView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +119,7 @@
 		30EA4E431A925BC400A91924 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Roman Simenok";
 				TargetAttributes = {
 					30EA4E4A1A925BC400A91924 = {
@@ -162,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				301F1E781E6790C6006FE682 /* RSSliderView.m in Sources */,
+				FC9DDB872199D21F00BC6128 /* RSSliderView.m in Sources */,
 				30EA4E571A925BC400A91924 /* ViewController.m in Sources */,
 				30EA4E541A925BC400A91924 /* AppDelegate.m in Sources */,
 				30EA4E511A925BC400A91924 /* main.m in Sources */,
@@ -203,12 +204,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -255,12 +258,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

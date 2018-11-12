@@ -23,48 +23,68 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#define handleWidth 14.0 // handle width
-#define borderWidth 2.0 // size of border under the slider
-#define viewCornerRadius 5.0 // view corners radius
-#define animationSpeed 0.1 // speed when slider change position on tap
-
 #import <UIKit/UIKit.h>
 
 @class RSSliderView;
 
-typedef enum {
-    Vertical,
-    Horizontal
-} Orientation;
+typedef NS_ENUM(NSUInteger, RSSliderViewOrientation) {
+    RSSliderViewOrientationVertical,
+    RSSliderViewOrientationHorizontal
+};
 
-@protocol RSliderViewDelegate <NSObject>
+@protocol RSSliderViewDelegate <NSObject>
 
 @optional
 
--(void)sliderValueChanged:(RSSliderView *)sender; // calls when user is swiping slider
--(void)sliderValueChangeEnded:(RSSliderView *)sender; // calls when user touchUpInside or toucUpOutside slider
+- (void)sliderValueWillChange:(RSSliderView *)sender;
+- (void)sliderValueDidChange:(RSSliderView *)sender;
 
 @end
 
-@interface RSSliderView : UIView {
-    BOOL isHandleHidden;
-}
+@interface RSSliderView : UIView
 
-@property (nonatomic, strong) UIView *foregroundView;
-@property (nonatomic, strong) UIView *handleView;
-@property (nonatomic, strong) UILabel *label;
-@property (nonatomic, assign, setter=setSliderValue:) float value;
+@property (nonatomic, strong) UIColor *foregroundColor;
+@property (nonatomic, strong) UIColor *handleColor;
+@property (nonatomic, strong) UIColor *borderColor;
+@property (nonatomic, strong) UIColor *textColor;
 
-@property (nonatomic, weak) id <RSliderViewDelegate> delegate;
+/**
+ Text in middle of the slider.
+ */
+@property (nonatomic, strong) NSString *text;
 
-@property (nonatomic, assign) Orientation orientation;
+@property (nonatomic, strong) UIFont *font;
 
--(void)setValue:(float)value;
--(void)setValue:(float)value withAnimation:(bool)isAnimate completion:(void (^)(BOOL finished))completion;
--(void)setColorsForBackground:(UIColor *)bCol foreground:(UIColor *)fCol handle:(UIColor *)hCol border:(UIColor *)brdrCol;
--(void)removeRoundCorners:(BOOL)corners removeBorder:(BOOL)border;
--(void)hideHandle;
+/**
+ Corner raduis, 5.0 by default. Changes affects on handle corners.
+ */
+@property (nonatomic, assign) CGFloat cornerRadius;
 
--(id)initWithFrame:(CGRect)frame andOrientation:(Orientation)orientation;
+/**
+ 2.0 by default.
+ */
+@property (nonatomic, assign) CGFloat borderWidth;
+
+/**
+ No by default.
+ */
+@property (nonatomic, assign, getter=isHandleHidden) BOOL handleHidden;
+
+/**
+ Calculates from width and height automatically, but can be changed after init.
+ */
+@property (nonatomic, assign) RSSliderViewOrientation orientation;
+
+@property (nonatomic, assign) float value;
+
+@property (nonatomic, weak) id <RSSliderViewDelegate> delegate;
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (void)setValue:(float)value;
+- (void)setValue:(float)value withAnimation:(bool)animate;
+- (void)setValue:(float)value withAnimation:(bool)animate completion:(void (^)(BOOL finished))completion;
+
 
 @end
