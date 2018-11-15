@@ -1,44 +1,47 @@
 # RSSliderView
-RSSliderView is a simple control for IOS based on UIView Class.
+RSSliderView is a simple control for iOS based on UIView class.
 
-Here a preview:
+Preview:
 
 ![A preview of this control](http://i.piccy.info/i9/afdcd8b5029e1f28b8bd33f7bd3822c1/1424118139/12622/780425/123.png)
 
-To create slider just do:
+## Create
+RSSliderView is IBDesignable so you can create it in IB or programmatically as you prefer.
 
 ``` Objective-C
-RSSliderView *horSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(40, 40, 300, 80) andOrientation:Horizontal];
+RSSliderView *horSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(20, 40, 280, 70)];
 horSlider.delegate = self;
-[horSlider setColorsForBackground:[UIColor colorWithRed:27.0/255.0 green:28.0/255.0 blue:37.0/255.0 alpha:1.0]
-                       foreground:[UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0]
-                           handle:[UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0]
-                           border:[UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0]];
-horSlider.label.text = @"Horizontal slider";
-horSlider.label.font = [UIFont fontWithName:@"Helvetica" size:25];
-horSlider.label.textColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
+horSlider.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:28.0/255.0 blue:37.0/255.0 alpha:1.0];
+horSlider.foregroundColor = [UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0];
+horSlider.handleColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
+horSlider.borderColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];    
+horSlider.text = @"Horizontal slider";
+horSlider.textColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
 [self.view addSubview:horSlider];
 ```
 
-after you set delegate you can get values from slider
+Observe slider value change via delegate
 ``` Objective-C
--(void)sliderValueChanged:(RSSliderView *)sender {
-    NSLog(@"Value Changed: %f", sender.value);
-}
+- (void)sliderWillChangeValue:(RSSliderView *)sender;
+- (void)sliderDidChangeValue:(RSSliderView *)sender;
+```
 
--(void)sliderValueChangeEnded:(RSSliderView *)sender {
-    NSLog(@"Touch ended: %f", sender.value);
-}
-```
-If you don't need handle
+## Customize Appearance
 ``` Objective-C
-    [mySlider hideHandle];
-```
-If you don't like round corners or border
-``` Objective-C
-	[mySlider removeRoundCorners:YES removeBorder:YES];
+@property (nonatomic, strong) IBInspectable UIColor *backgroundColor;
+@property (nonatomic, strong) IBInspectable UIColor *foregroundColor;
+@property (nonatomic, strong) IBInspectable UIColor *handleColor;
+@property (nonatomic, strong) IBInspectable UIColor *borderColor;
+@property (nonatomic, strong) IBInspectable UIColor *textColor;
+@property (nonatomic, strong) IBInspectable NSString *text;
+@property (nonatomic, strong) IBInspectable UIFont *font;
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
+@property (nonatomic, assign) IBInspectable CGFloat borderWidth;
+@property (nonatomic, assign) IBInspectable CGFloat handleWidth;
+@property (nonatomic, assign) IBInspectable CGFloat onTapAnimationSpeed;
+@property (nonatomic, assign, getter=isHandleHidden) IBInspectable BOOL handleHidden;
+@property (nonatomic, assign) RSSliderViewOrientation orientation;
 ```
 
 ## License
-
 RSSliderView is licensed under the terms of the MIT license. Please see the [LICENSE](LICENSE) file for full details.
