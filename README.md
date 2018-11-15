@@ -3,7 +3,7 @@ RSSliderView is a simple control for iOS based on UIView class.
 
 Preview:
 
-![A preview of this control](http://i.piccy.info/i9/afdcd8b5029e1f28b8bd33f7bd3822c1/1424118139/12622/780425/123.png)
+<img src="http://i.piccy.info/i9/7755a8dc23dba093e99bbb8dbb63e059/1542282938/26269/1282420/Simulator_Screen_Shot_iPhone_5s_2018_11_15_at_13_51_49.png" alt="Slider preview" width="300">
 
 ## Create
 RSSliderView is IBDesignable so you can create it in IB or programmatically as you prefer.
