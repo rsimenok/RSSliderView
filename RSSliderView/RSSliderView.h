@@ -41,50 +41,61 @@ typedef NS_ENUM(NSUInteger, RSSliderViewOrientation) {
 
 @end
 
+IB_DESIGNABLE
 @interface RSSliderView : UIView
 
-@property (nonatomic, strong) UIColor *foregroundColor;
-@property (nonatomic, strong) UIColor *handleColor;
-@property (nonatomic, strong) UIColor *borderColor;
-@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) IBInspectable UIColor *foregroundColor;
+@property (nonatomic, strong) IBInspectable UIColor *handleColor;
+@property (nonatomic, strong) IBInspectable UIColor *borderColor;
+@property (nonatomic, strong) IBInspectable UIColor *textColor;
 
 /**
  Text in middle of the slider.
  */
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) IBInspectable NSString *text;
 
-@property (nonatomic, strong) UIFont *font;
+@property (nonatomic, strong) IBInspectable UIFont *font;
 
 /**
  Corner raduis, 5.0 by default. Changes affects on handle corners.
  */
-@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
 
 /**
  2.0 by default.
  */
-@property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) IBInspectable CGFloat borderWidth;
+
+/**
+ 14.0 by default.
+ */
+@property (nonatomic, assign) IBInspectable CGFloat handleWidth;
+
+/**
+ Animation speed for On Tap Value Change.
+ 0.1 by default.
+ */
+@property (nonatomic, assign) IBInspectable CGFloat onTapAnimationSpeed;
 
 /**
  No by default.
  */
-@property (nonatomic, assign, getter=isHandleHidden) BOOL handleHidden;
+@property (nonatomic, assign, getter=isHandleHidden) IBInspectable BOOL handleHidden;
 
 /**
- Calculates from width and height automatically, but can be changed after init.
+ Calculates from width and height automatically.
  */
 @property (nonatomic, assign) RSSliderViewOrientation orientation;
 
-@property (nonatomic, assign) float value;
+@property (nonatomic, assign) IBInspectable CGFloat value;
 
-@property (nonatomic, weak) id <RSSliderViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id <RSSliderViewDelegate> delegate;
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)setValue:(float)value;
-- (void)setValue:(float)value withAnimation:(bool)animate;
-- (void)setValue:(float)value withAnimation:(bool)animate completion:(void (^)(BOOL finished))completion;
+- (void)setValue:(CGFloat)value withAnimation:(BOOL)animate;
+- (void)setValue:(CGFloat)value withAnimation:(BOOL)animate completion:(void (^)(BOOL finished))completion;
 
 
 @end

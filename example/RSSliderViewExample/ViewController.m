@@ -24,8 +24,8 @@
     horSlider.foregroundColor = [UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0];
     horSlider.handleColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
     horSlider.borderColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
-    horSlider.text = @"Horizontal slider";
     
+    horSlider.text = @"Horizontal slider";
     horSlider.textColor = [UIColor colorWithRed:0.0 green:205.0/255.0 blue:184.0/255.0 alpha:1.0];
     [self.view addSubview:horSlider];
     
@@ -36,18 +36,13 @@
     vertSlider.handleColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
     vertSlider.borderColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
     
-    // Coment code below if you donn't need text on you slider
     vertSlider.text = @"Vertical slider";
     vertSlider.textColor = [UIColor colorWithRed:128.0/255.0 green:209.0/255.0 blue:79.0/255.0 alpha:1.0];
     [self.view addSubview:vertSlider];
 }
 
-- (void)sliderValueChanged:(RSSliderView *)sender {
-    NSLog(@"Value Changed: %f", sender.value);
-}
-
-- (void)sliderValueChangeEnded:(RSSliderView *)sender {
-    NSLog(@"Touсh ended: %f", sender.value);
+- (void)sliderValueDidChange:(RSSliderView *)sender {
+    NSLog(@"Slider value: %f", sender.value);
 }
 
 @end
