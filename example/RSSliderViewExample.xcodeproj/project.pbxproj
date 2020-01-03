@@ -13,11 +13,11 @@
 		30EA4E5A1A925BC400A91924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E581A925BC400A91924 /* Main.storyboard */; };
 		30EA4E5C1A925BC400A91924 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E5B1A925BC400A91924 /* Images.xcassets */; };
 		30EA4E5F1A925BC400A91924 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30EA4E5D1A925BC400A91924 /* LaunchScreen.xib */; };
-		30EA4E771A925C9300A91924 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA4E761A925C9300A91924 /* RSSliderView.m */; };
+		FC9DDB872199D21F00BC6128 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9DDB852199D21F00BC6128 /* RSSliderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		30EA4E4B1A925BC400A91924 /* RSSliderView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSliderView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30EA4E4B1A925BC400A91924 /* RSSliderViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSliderViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EA4E4F1A925BC400A91924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30EA4E501A925BC400A91924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		30EA4E521A925BC400A91924 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -27,8 +27,8 @@
 		30EA4E591A925BC400A91924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30EA4E5B1A925BC400A91924 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		30EA4E5E1A925BC400A91924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		30EA4E751A925C9300A91924 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
-		30EA4E761A925C9300A91924 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
+		FC9DDB852199D21F00BC6128 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
+		FC9DDB862199D21F00BC6128 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 		30EA4E421A925BC400A91924 = {
 			isa = PBXGroup;
 			children = (
-				30EA4E4D1A925BC400A91924 /* RSSliderView */,
+				30EA4E4D1A925BC400A91924 /* RSSliderViewExample */,
 				30EA4E4C1A925BC400A91924 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,51 +53,52 @@
 		30EA4E4C1A925BC400A91924 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30EA4E4B1A925BC400A91924 /* RSSliderView.app */,
+				30EA4E4B1A925BC400A91924 /* RSSliderViewExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30EA4E4D1A925BC400A91924 /* RSSliderView */ = {
+		30EA4E4D1A925BC400A91924 /* RSSliderViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				30EA4E741A925C9300A91924 /* source */,
-				30EA4E521A925BC400A91924 /* AppDelegate.h */,
-				30EA4E531A925BC400A91924 /* AppDelegate.m */,
+				FC9DDB842199D21F00BC6128 /* RSSliderView */,
 				30EA4E551A925BC400A91924 /* ViewController.h */,
 				30EA4E561A925BC400A91924 /* ViewController.m */,
+				30EA4E521A925BC400A91924 /* AppDelegate.h */,
+				30EA4E531A925BC400A91924 /* AppDelegate.m */,
 				30EA4E581A925BC400A91924 /* Main.storyboard */,
-				30EA4E5B1A925BC400A91924 /* Images.xcassets */,
-				30EA4E5D1A925BC400A91924 /* LaunchScreen.xib */,
 				30EA4E4E1A925BC400A91924 /* Supporting Files */,
 			);
-			path = RSSliderView;
+			path = RSSliderViewExample;
 			sourceTree = "<group>";
 		};
 		30EA4E4E1A925BC400A91924 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				30EA4E5B1A925BC400A91924 /* Images.xcassets */,
+				30EA4E5D1A925BC400A91924 /* LaunchScreen.xib */,
 				30EA4E4F1A925BC400A91924 /* Info.plist */,
 				30EA4E501A925BC400A91924 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		30EA4E741A925C9300A91924 /* source */ = {
+		FC9DDB842199D21F00BC6128 /* RSSliderView */ = {
 			isa = PBXGroup;
 			children = (
-				30EA4E751A925C9300A91924 /* RSSliderView.h */,
-				30EA4E761A925C9300A91924 /* RSSliderView.m */,
+				FC9DDB862199D21F00BC6128 /* RSSliderView.h */,
+				FC9DDB852199D21F00BC6128 /* RSSliderView.m */,
 			);
-			path = source;
+			name = RSSliderView;
+			path = ../../RSSliderView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30EA4E4A1A925BC400A91924 /* RSSliderView */ = {
+		30EA4E4A1A925BC400A91924 /* RSSliderViewExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RSSliderView" */;
+			buildConfigurationList = 30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RSSliderViewExample" */;
 			buildPhases = (
 				30EA4E471A925BC400A91924 /* Sources */,
 				30EA4E481A925BC400A91924 /* Frameworks */,
@@ -107,9 +108,9 @@
 			);
 			dependencies = (
 			);
-			name = RSSliderView;
+			name = RSSliderViewExample;
 			productName = RS_SliderView;
-			productReference = 30EA4E4B1A925BC400A91924 /* RSSliderView.app */;
+			productReference = 30EA4E4B1A925BC400A91924 /* RSSliderViewExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -118,15 +119,16 @@
 		30EA4E431A925BC400A91924 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Roman Simenok";
 				TargetAttributes = {
 					30EA4E4A1A925BC400A91924 = {
 						CreatedOnToolsVersion = 6.1.1;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
-			buildConfigurationList = 30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RSSliderView" */;
+			buildConfigurationList = 30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RSSliderViewExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -139,7 +141,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				30EA4E4A1A925BC400A91924 /* RSSliderView */,
+				30EA4E4A1A925BC400A91924 /* RSSliderViewExample */,
 			);
 		};
 /* End PBXProject section */
@@ -162,7 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30EA4E771A925C9300A91924 /* RSSliderView.m in Sources */,
+				FC9DDB872199D21F00BC6128 /* RSSliderView.m in Sources */,
 				30EA4E571A925BC400A91924 /* ViewController.m in Sources */,
 				30EA4E541A925BC400A91924 /* AppDelegate.m in Sources */,
 				30EA4E511A925BC400A91924 /* main.m in Sources */,
@@ -199,20 +201,32 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -225,7 +239,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -241,13 +255,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -255,13 +279,14 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -273,9 +298,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "$(SRCROOT)/RSSliderView/Info.plist";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/RSSliderViewExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = RSSliderView;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.simenok.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = RSSliderViewExample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -283,16 +312,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "$(SRCROOT)/RSSliderView/Info.plist";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/RSSliderViewExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = RSSliderView;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.simenok.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = RSSliderViewExample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RSSliderView" */ = {
+		30EA4E461A925BC400A91924 /* Build configuration list for PBXProject "RSSliderViewExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30EA4E6C1A925BC400A91924 /* Debug */,
@@ -301,7 +334,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RSSliderView" */ = {
+		30EA4E6E1A925BC400A91924 /* Build configuration list for PBXNativeTarget "RSSliderViewExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30EA4E6F1A925BC400A91924 /* Debug */,
