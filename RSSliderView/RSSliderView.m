@@ -39,6 +39,8 @@
 
 @implementation RSSliderView
 
+@synthesize handleWidth = _handleWidth;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self mainInit];
@@ -257,6 +259,14 @@
     [self setValue:self.value];
 }
 
+- (CGFloat)handleWidth {
+    if (self.isHandleHidden) {
+        return 0;
+    } else {
+        return _handleWidth;
+    }
+}
+
 #pragma mark - Other Methods
 
 - (void)updateTextLabelPosition {
@@ -270,8 +280,8 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
     
-    if ([self.delegate respondsToSelector:@selector(sliderValueWillChange:)]) {
-        [self.delegate sliderValueWillChange:self];
+    if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
+        [self.delegate sliderWillChangeValue:self];
     }
     
     switch (self.orientation) {
@@ -290,15 +300,15 @@
     }
     
     if ((point.x >= 0) && point.x <= self.frame.size.width - self.handleWidth) {
-        if ([self.delegate respondsToSelector:@selector(sliderValueDidChange:)]) {
-            [self.delegate sliderValueDidChange:self];
+        if ([self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
+            [self.delegate sliderDidChangeValue:self];
         }
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([self.delegate respondsToSelector:@selector(sliderValueWillChange:)]) {
-        [self.delegate sliderValueWillChange:self];
+    if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
+        [self.delegate sliderWillChangeValue:self];
     }
     
     UITouch *touch = [touches anyObject];
@@ -308,8 +318,8 @@
     [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
         [weakSelf changeStarForegroundViewWithPoint:point];
     } completion:^(BOOL finished) {
-        if ([self.delegate respondsToSelector:@selector(sliderValueDidChange:)]) {
-            [self.delegate sliderValueDidChange:self];
+        if ([self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
+            [self.delegate sliderDidChangeValue:self];
         }
     }];
 }
@@ -321,15 +331,15 @@
     
     switch (self.orientation) {
         case RSSliderViewOrientationVertical: {
-            if (p.y < 0) {
-                p.y = 0;
+            if (p.y <= self.handleWidth / 2) {
+                p.y = self.handleWidth / 2;
             }
             
-            if (p.y > self.frame.size.height) {
-                p.y = self.frame.size.height;
+            if (p.y >= self.frame.size.height - self.handleWidth / 2) {
+                p.y = self.frame.size.height - self.handleWidth / 2;
             }
             
-            self.sliderValue = 1 - (p.y / self.frame.size.height);
+            self.sliderValue = 1 - (p.y / (self.frame.size.height - self.handleWidth / 2));
             self.foregroundView.frame = CGRectMake(0,
                                                    self.frame.size.height,
                                                    self.frame.size.width,
@@ -356,15 +366,15 @@
         }
             break;
         case RSSliderViewOrientationHorizontal: {
-            if (p.x < 0) {
-                p.x = 0;
+            if (p.x <= self.handleWidth / 2) {
+                p.x = self.handleWidth / 2;
             }
             
-            if (p.x > self.frame.size.width) {
-                p.x = self.frame.size.width;
+            if (p.x >= self.frame.size.width - self.handleWidth / 2) {
+                p.x = self.frame.size.width - self.handleWidth / 2;
             }
             
-            self.sliderValue = p.x / self.frame.size.width;
+            self.sliderValue = p.x / (self.frame.size.width - self.handleWidth);
             self.foregroundView.frame = CGRectMake(0, 0, p.x, self.frame.size.height);
             
             if (!self.isHandleHidden) {

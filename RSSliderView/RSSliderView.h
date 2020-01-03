@@ -35,9 +35,8 @@ typedef NS_ENUM(NSUInteger, RSSliderViewOrientation) {
 @protocol RSSliderViewDelegate <NSObject>
 
 @optional
-
-- (void)sliderValueWillChange:(RSSliderView *)sender;
-- (void)sliderValueDidChange:(RSSliderView *)sender;
+- (void)sliderWillChangeValue:(RSSliderView *)sender;
+- (void)sliderDidChangeValue:(RSSliderView *)sender;
 
 @end
 
