@@ -32,6 +32,11 @@ typedef NS_ENUM(NSUInteger, RSSliderViewOrientation) {
     RSSliderViewOrientationHorizontal
 };
 
+typedef NS_ENUM(NSUInteger, RSSliderBehavior) {
+	RSSliderBehaviorAbsoluteTouch, // Jumps/animates to tapped position, default
+	RSSliderBehaviorRelativeDrag, // Touch-drag from current position, never jumps
+};
+
 @protocol RSSliderViewDelegate <NSObject>
 
 @optional
@@ -85,6 +90,8 @@ IB_DESIGNABLE
  Calculates from width and height automatically.
  */
 @property (nonatomic, assign) RSSliderViewOrientation orientation;
+
+@property (nonatomic, assign) RSSliderBehavior behavior;
 
 @property (nonatomic, assign) IBInspectable CGFloat value;
 

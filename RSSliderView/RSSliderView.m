@@ -103,7 +103,7 @@
     CGPoint point = [self sliderValueToFrameValue:value];
 
     if (animate) {
-        __weak typeof(self) weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         
         [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
             [weakSelf changeStarForegroundViewWithPoint:point];
@@ -271,13 +271,22 @@
         _touchLastPoint = newPoint;
 
         if (delta.x != 0 || delta.y != 0) {
-            CGPoint point = [self sliderValueToFrameValue:_sliderValue];
-            point = (CGPoint){point.x + delta.x, point.y + delta.y};
-
+            CGPoint point;
+            switch (self.behavior) {
+                case RSSliderBehaviorRelativeDrag: {
+                    point = [self sliderValueToFrameValue:_sliderValue];
+                    point = (CGPoint){point.x + delta.x, point.y + delta.y};
+                    break;
+                }
+                case RSSliderBehaviorAbsoluteTouch:
+                default: {
+                    point = newPoint;
+                    break;
+                }
+            }
             if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
                 [self.delegate sliderWillChangeValue:self];
             }
-
             switch (self.orientation) {
                 case RSSliderViewOrientationVertical:
                     [self changeStarForegroundViewWithPoint:point];
@@ -286,7 +295,6 @@
                     [self changeStarForegroundViewWithPoint:point];
                     break;
             }
-
             if ([self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
                 [self.delegate sliderDidChangeValue:self];
             }
@@ -299,27 +307,34 @@
     if (_touchTracker && [touches containsObject:_touchTracker]) {
 
         CGPoint newPoint = [_touchTracker locationInView:self];
-        CGPoint delta = (CGPoint) {newPoint.x - _touchLastPoint.x, newPoint.y - _touchLastPoint.y};
         _touchTracker = nil;
 
-        if (delta.x != 0 || delta.y != 0) {
-            CGPoint point = [self sliderValueToFrameValue:_sliderValue];
-            point = (CGPoint){point.x + delta.x, point.y + delta.y};
-
-            if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
-                [self.delegate sliderWillChangeValue:self];
+        CGPoint point;
+        switch (self.behavior) {
+            case RSSliderBehaviorRelativeDrag: {
+                CGPoint delta = (CGPoint) {newPoint.x - _touchLastPoint.x, newPoint.y - _touchLastPoint.y};
+                point = [self sliderValueToFrameValue:_sliderValue];
+                point = (CGPoint){point.x + delta.x, point.y + delta.y};
+                break;
             }
-
-            __weak typeof(self) weakSelf = self;
-            [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
-                [weakSelf changeStarForegroundViewWithPoint:point];
-            } completion:^(BOOL finished) {
-                __strong typeof(weakSelf) Self = weakSelf;
-                if ([Self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
-                    [Self.delegate sliderDidChangeValue:Self];
-                }
-            }];
+            case RSSliderBehaviorAbsoluteTouch:
+            default: {
+                point = newPoint;
+                break;
+            }
         }
+        if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
+            [self.delegate sliderWillChangeValue:self];
+        }
+        __weak __typeof(self) weakSelf = self;
+        [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
+            [weakSelf changeStarForegroundViewWithPoint:point];
+        } completion:^(BOOL finished) {
+            __strong __typeof(weakSelf) Self = weakSelf;
+            if ([Self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
+                [Self.delegate sliderDidChangeValue:Self];
+            }
+        }];
     }
 }
 
