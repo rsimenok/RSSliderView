@@ -35,6 +35,8 @@
 @property (nonatomic, strong) UIView *handleView;
 @property (nonatomic, strong, readwrite) UILabel *textLabel;
 
+@property (nonatomic, strong) UITouch *touchTracker;
+@property (nonatomic, assign) CGPoint touchLastPoint;
 @end
 
 @implementation RSSliderView
@@ -97,29 +99,11 @@
 
 - (void)setValue:(CGFloat)value withAnimation:(BOOL)animate completion:(void (^)(BOOL finished))completion {
     NSAssert((value >= 0.0) && (value <= 1.0), @"Value must be between 0 and 1");
-    
-    if (value < 0) {
-        value = 0;
-    }
-    
-    if (value > 1) {
-        value = 1;
-    }
-    
-    CGPoint point;
-    switch (self.orientation) {
-        case RSSliderViewOrientationVertical:
-            point = CGPointMake(0, (1-value) * self.frame.size.height);
-            break;
-        case RSSliderViewOrientationHorizontal:
-            point = CGPointMake(value * self.frame.size.width, 0);
-            break;
-        default:
-            break;
-    }
-    
+    value = [self clampFloat:value min:0 max:1];
+    CGPoint point = [self sliderValueToFrameValue:value];
+
     if (animate) {
-        __weak typeof(self) weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         
         [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
             [weakSelf changeStarForegroundViewWithPoint:point];
@@ -277,51 +261,107 @@
 #pragma mark - Touch Events
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self];
-    
-    if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
-        [self.delegate sliderWillChangeValue:self];
+    if (!_touchTracker) {
+        _touchTracker = [touches anyObject];
+        _touchLastPoint = [_touchTracker locationInView:self];
     }
-    
-    switch (self.orientation) {
-        case RSSliderViewOrientationVertical:
-            if (!(point.y < 0) && !(point.y > self.frame.size.height)) {
-                [self changeStarForegroundViewWithPoint:point];
+    if ([touches containsObject:_touchTracker]) {
+        CGPoint newPoint = [_touchTracker locationInView:self];
+        CGPoint delta = (CGPoint) {newPoint.x - _touchLastPoint.x, newPoint.y - _touchLastPoint.y};
+        _touchLastPoint = newPoint;
+
+        if (delta.x != 0 || delta.y != 0) {
+            CGPoint point;
+            switch (self.behavior) {
+                case RSSliderBehaviorRelativeDrag: {
+                    point = [self sliderValueToFrameValue:_sliderValue];
+                    point = (CGPoint){point.x + delta.x, point.y + delta.y};
+                    break;
+                }
+                case RSSliderBehaviorAbsoluteTouch:
+                default: {
+                    point = newPoint;
+                    break;
+                }
             }
-            break;
-        case RSSliderViewOrientationHorizontal:
-            if (!(point.x < 0) && !(point.x > self.frame.size.width)) {
-                [self changeStarForegroundViewWithPoint:point];
+            if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
+                [self.delegate sliderWillChangeValue:self];
             }
-            break;
-        default:
-            break;
-    }
-    
-    if ((point.x >= 0) && point.x <= self.frame.size.width - self.handleWidth) {
-        if ([self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
-            [self.delegate sliderDidChangeValue:self];
+            switch (self.orientation) {
+                case RSSliderViewOrientationVertical:
+                    [self changeStarForegroundViewWithPoint:point];
+                    break;
+                case RSSliderViewOrientationHorizontal:
+                    [self changeStarForegroundViewWithPoint:point];
+                    break;
+            }
+            if ([self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
+                [self.delegate sliderDidChangeValue:self];
+            }
         }
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
-        [self.delegate sliderWillChangeValue:self];
-    }
-    
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self];
-    
-    __weak typeof(self) weakSelf = self;
-    [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
-        [weakSelf changeStarForegroundViewWithPoint:point];
-    } completion:^(BOOL finished) {
-        if ([self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
-            [self.delegate sliderDidChangeValue:self];
+
+    if (_touchTracker && [touches containsObject:_touchTracker]) {
+
+        CGPoint newPoint = [_touchTracker locationInView:self];
+        _touchTracker = nil;
+
+        CGPoint point;
+        switch (self.behavior) {
+            case RSSliderBehaviorRelativeDrag: {
+                CGPoint delta = (CGPoint) {newPoint.x - _touchLastPoint.x, newPoint.y - _touchLastPoint.y};
+                point = [self sliderValueToFrameValue:_sliderValue];
+                point = (CGPoint){point.x + delta.x, point.y + delta.y};
+                break;
+            }
+            case RSSliderBehaviorAbsoluteTouch:
+            default: {
+                point = newPoint;
+                break;
+            }
         }
-    }];
+        if ([self.delegate respondsToSelector:@selector(sliderWillChangeValue:)]) {
+            [self.delegate sliderWillChangeValue:self];
+        }
+        __weak __typeof(self) weakSelf = self;
+        [UIView animateWithDuration:self.onTapAnimationSpeed animations:^ {
+            [weakSelf changeStarForegroundViewWithPoint:point];
+        } completion:^(BOOL finished) {
+            __strong __typeof(weakSelf) Self = weakSelf;
+            if ([Self.delegate respondsToSelector:@selector(sliderDidChangeValue:)]) {
+                [Self.delegate sliderDidChangeValue:Self];
+            }
+        }];
+    }
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    _touchTracker = nil;
+}
+
+
+#pragma mark - Helper functions
+
+- (CGFloat)clampFloat:(CGFloat)value min:(CGFloat)min max:(CGFloat)max {
+    return value < min ? min : value > max ? max : value;
+}
+
+- (CGPoint)clampPoint:(CGPoint)value min:(CGPoint)min max:(CGPoint)max {
+    return (CGPoint){ [self clampFloat:value.x min:min.x max:max.x], [self clampFloat:value.y min:min.y max:max.y] };
+}
+
+- (CGPoint)sliderValueToFrameValue:(CGFloat)value {
+	return (CGPoint){ value * (self.frame.size.width - self.handleWidth), (1 - value) * (self.frame.size.height - self.handleWidth) };
+}
+- (CGFloat)frameValueToSliderValue:(CGPoint)point {
+    switch (self.orientation) {
+        case RSSliderViewOrientationHorizontal: return [self clampFloat:point.x / (self.frame.size.width - self.handleWidth) min:0 max:1];
+        case RSSliderViewOrientationVertical: return [self clampFloat:1 - (point.y / (self.frame.size.height - self.handleWidth)) min:0 max:1];
+		default: return 0;
+    }
 }
 
 #pragma mark - Change Slider Foreground With Point
@@ -331,15 +371,10 @@
     
     switch (self.orientation) {
         case RSSliderViewOrientationVertical: {
-            if (p.y <= self.handleWidth / 2) {
-                p.y = self.handleWidth / 2;
-            }
-            
-            if (p.y >= self.frame.size.height - self.handleWidth / 2) {
-                p.y = self.frame.size.height - self.handleWidth / 2;
-            }
-            
-            self.sliderValue = 1 - (p.y / (self.frame.size.height - self.handleWidth / 2));
+
+            self.sliderValue = [self frameValueToSliderValue:p];
+            p.y = [self clampFloat:p.y+self.handleWidth/2 min:self.handleWidth/2 max:self.frame.size.height - self.handleWidth/2];
+
             self.foregroundView.frame = CGRectMake(0,
                                                    self.frame.size.height,
                                                    self.frame.size.width,
@@ -366,15 +401,10 @@
         }
             break;
         case RSSliderViewOrientationHorizontal: {
-            if (p.x <= self.handleWidth / 2) {
-                p.x = self.handleWidth / 2;
-            }
-            
-            if (p.x >= self.frame.size.width - self.handleWidth / 2) {
-                p.x = self.frame.size.width - self.handleWidth / 2;
-            }
-            
-            self.sliderValue = p.x / (self.frame.size.width - self.handleWidth);
+
+            self.sliderValue = [self frameValueToSliderValue:p];
+            p.x = [self clampFloat:p.x+self.handleWidth/2 min:self.handleWidth/2 max:self.frame.size.width - self.handleWidth/2];
+
             self.foregroundView.frame = CGRectMake(0, 0, p.x, self.frame.size.height);
             
             if (!self.isHandleHidden) {

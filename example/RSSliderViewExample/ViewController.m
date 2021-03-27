@@ -19,6 +19,7 @@
     [super viewDidLoad];
 
     RSSliderView *horSlider = [[RSSliderView alloc] initWithFrame:CGRectMake(20, 40, 280, 70)];
+	horSlider.behavior = RSSliderBehaviorRelativeDrag;
     horSlider.delegate = self;
     horSlider.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:28.0/255.0 blue:37.0/255.0 alpha:1.0];
     horSlider.foregroundColor = [UIColor colorWithRed:0.0 green:106.0/255.0 blue:95.0/255.0 alpha:1.0];
